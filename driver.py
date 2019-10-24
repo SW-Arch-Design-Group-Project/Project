@@ -1,4 +1,5 @@
 import login
+import sqlite3
 
 def main():
     print("\n***************************")
@@ -27,10 +28,17 @@ def main():
 
 def displayTable():
 
-    # TODO Add this function that will display the items from the Databse that will be available
+    # TODO Add this function that will display the items from the Database that will be available
     #      add to cart.
 
-    print("Table of items will go here.")
+    conn = sqlite3.connect('store.db')
+    cursor = conn.execute('SELECT * FROM Inventory GROUP BY Category')
+
+    print('{:<10s}{:<25s}{:<30s}{:<35s}{:<45s}{:<50s}'.format("Item ID", "Name", "Quantity", "Category", "Price", "Desc"))
+    for row in cursor:
+        print('{:<10d}{:<25s}{:<30d}{:<35f}{:<45s}{:<50s}'.format(row[0], row[1], row[5],
+              row[3], row[4], row[2]))
+
     return
 
 
