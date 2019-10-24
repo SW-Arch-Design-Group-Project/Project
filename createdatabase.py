@@ -53,6 +53,10 @@ conn.execute ("INSERT INTO Inventory (Name,Description,Price,Category,Quantity)\
 conn.execute ("INSERT INTO Inventory (Name,Description,Price,Category,Quantity)\
     VALUES ('Iphone 4', 'a literal dinosaur', 200.00, 'Small electronics',1 )");
 
+conn.commit()
+
+conn.close()
+
 
 #cursor = conn.execute("SELECT ItemId, Name, Description, Price, Category, Quantity from Inventory")
 
