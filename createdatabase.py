@@ -2,7 +2,7 @@ import sqlite3
 
 conn = sqlite3.connect('store.db')
 
-print "Opened database successfully";
+print("Opened database successfully")
 
 conn.execute('''CREATE TABLE User
          (UserID INTEGER PRIMARY KEY	 AUTOINCREMENT,
