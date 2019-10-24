@@ -2,7 +2,7 @@
 
 
 
-class item :
+class item : 
 
     # initializer
     # called by python at object creation time
@@ -26,6 +26,10 @@ class item :
     def get_price( self ) :
 
         return self._price
+    
+    def get_name(self):
+       
+        return self._aName
 
 
     # price mutator method
@@ -43,4 +47,35 @@ class item :
         else :
             self._price = newPrice
 			
+
+class Cart:
+    
+    def __init__(self, list):
+        self.list = []
+    
+    #add items to the list
+    def addItem(self, item);
+        self.list.append(self.list)
+    
+    #get the total of all items in cart
+    def getTotal(self): 
+        total = 0;
+        for item in self.list:
+            name, price = item
+            total = total + price
+    #get number of items in the cart
+    def getNumItems(self):
+        count = 0
+        for c in range(self.list):
+            count = self.list + 1
+            return count
+    
+    #remove items from the cart
+    def removeItem(self, item)
+    
+    
+    
+        
+        
+        
 			
