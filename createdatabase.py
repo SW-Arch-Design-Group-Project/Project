@@ -2,6 +2,7 @@ import sqlite3
 
 conn = sqlite3.connect('store.db')
 
+
 print("Opened database successfully")
 
 conn.execute('''CREATE TABLE User
@@ -39,6 +40,32 @@ conn.execute('''CREATE TABLE PurchaseHistory
         CreditCard	INTEGER		NOT NULL,
     	FOREIGN KEY (OrderID)	REFERENCES Orders(OrderID),
     	FOREIGN KEY (UserID)	REFERENCES User(UserID));''')
+
+conn.execute ("INSERT INTO Inventory (Name,Description,Price,Category,Quantity)\
+    VALUES ('pledge', 'lemon pledge', 5.00, 'Household items',20 )");
+
+conn.execute ("INSERT INTO Inventory (Name,Description,Price,Category,Quantity)\
+    VALUES ('thomas the tank engine', 'toy wooden train', 10.00, 'Toys',10 )");
+
+conn.execute ("INSERT INTO Inventory (Name,Description,Price,Category,Quantity)\
+    VALUES ('SWarch book', 'for some reason this book uses views and viewpoints', 69.00, 'Books',4 )");
+
+conn.execute ("INSERT INTO Inventory (Name,Description,Price,Category,Quantity)\
+    VALUES ('Iphone 4', 'a literal dinosaur', 200.00, 'Small electronics',1 )");
+
+
+#cursor = conn.execute("SELECT ItemId, Name, Description, Price, Category, Quantity from Inventory")
+
+#for row in cursor:
+#   print ("ItemID = ", row[0])
+#   print ("NAME = ", row[1])
+#   print ("Description = ", row[2])
+#   print ("Price = ", row[3])
+#   print ("Category =", row[4])
+#   print ("Quantity =",row[5])
+
+
+
 
 
 conn.close()
