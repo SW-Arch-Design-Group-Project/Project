@@ -31,7 +31,6 @@ def homeScreen(userID):
             if (userSelection) == (1):
                 displayTable(conn)
             elif (userSelection) == (2):
-                print("past orders\n")
                 displayOrderHistory(conn, currentUser)
             elif (userSelection) == (0):
                 print("\n**********************************")
@@ -46,19 +45,30 @@ def homeScreen(userID):
 
 
 def displayOrderHistory(conn, currentUser):
-    userID = conn.execute('SELECT UserID FROM Users WHERE Username = currentUser')
-    cursor = conn.execute('SELECT * FROM PurchaseHistory WHERE UserID = UserID')
+    cursor = conn.execute("SELECT UserID FROM User WHERE Username = ?", (currentUser,))
+    for row in cursor:
+        userID = row[0]
+        print(type(userID))
+    print(userID)
+
+    cursor = conn.execute("SELECT * FROM PurchaseHistory WHERE UserID = ?", (userID,))
 
     print('{:<10s}{:>25s}{:>30s}{:>35s}{:>45s}'.format("\nPurchase ID", "Order ID", "User ID",
                                                        "Total", "Credit Card"))
     for row in cursor:
-        print('{:<10d}{:<25d}{:<30d}{:<35.2f}{:<45d}'.format(row[0], row[1], row[5],
+        print('{:<10d}{:>25d}{:>30d}{:>35.2f}{:>45d}'.format(row[0], row[1], row[2],
               row[3], row[4]))
 
 
 def displayTable(conn):
 
+<<<<<<< HEAD
     # conn = sqlite3.connect('store.db')
+=======
+    # TODO Add this function that will display the items from the Database that will be available
+    #      add to cart.
+
+>>>>>>> dd7d59c4880d5c86d57b9b1bb5fdaaaefcebdd14
     cursor = conn.execute('SELECT * FROM Inventory')
 
     print('{:<10s}{:<25s}{:<30s}{:<35s}{:<45s}{:<50s}'.format("\nItem ID", "Name", "Quantity",
