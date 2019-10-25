@@ -42,29 +42,29 @@ def buildDatabase():
             FOREIGN KEY (OrderID)	REFERENCES Orders(OrderID),
             FOREIGN KEY (UserID)	REFERENCES User(UserID));''')
 
-conn.execute ("INSERT INTO User (Address, Password, Username)\
-    VALUES ('75 B. S. Hood Road, Mississippi State, MS 39762', 'SWARCH2019', 'User')");
+    conn.execute ("INSERT INTO User (Address, Password, Username)\
+        VALUES ('75 B. S. Hood Road, Mississippi State, MS 39762', 'SWARCH2019', 'User')");
 
-conn.execute ("INSERT INTO Inventory (Name, Description, Price, Category, Quantity)\
-    VALUES ('Pledge', 'Lemon scented Pledge', 8.00, 'Household items', 20)");
+    conn.execute ("INSERT INTO Inventory (Name, Description, Price, Category, Quantity)\
+        VALUES ('Pledge', 'Lemon scented Pledge', 8.00, 'Household items', 20)");
 
-conn.execute ("INSERT INTO Inventory (Name, Description, Price, Category, Quantity)\
-    VALUES ('Bleach', 'Used for bathroom cleaning', 5.00, 'Household items', 15)");
+    conn.execute ("INSERT INTO Inventory (Name, Description, Price, Category, Quantity)\
+        VALUES ('Bleach', 'Used for bathroom cleaning', 5.00, 'Household items', 15)");
 
-conn.execute ("INSERT INTO Inventory (Name, Description, Price, Category, Quantity)\
-    VALUES ('Toy Train', 'Wooden Toy Train', 10.00, 'Toys', 30)");
+    conn.execute ("INSERT INTO Inventory (Name, Description, Price, Category, Quantity)\
+        VALUES ('Toy Train', 'Wooden Toy Train', 10.00, 'Toys', 30)");
 
-conn.execute ("INSERT INTO Inventory (Name, Description, Price, Category, Quantity)\
-    VALUES ('Lego Set', 'Lego Star Wars set', 150.00, 'Toys', 10)");
+    conn.execute ("INSERT INTO Inventory (Name, Description, Price, Category, Quantity)\
+        VALUES ('Lego Set', 'Lego Star Wars set', 150.00, 'Toys', 10)");
 
-conn.execute ("INSERT INTO Inventory (Name, Description, Price, Category, Quantity)\
-    VALUES ('The Institute', 'Hardcover Book', 30.00, 'Books', 4)");
+    conn.execute ("INSERT INTO Inventory (Name, Description, Price, Category, Quantity)\
+        VALUES ('The Institute', 'Hardcover Book', 30.00, 'Books', 4)");
 
-conn.execute ("INSERT INTO Inventory (Name, Description, Price, Category, Quantity)\
-    VALUES ('Radio', 'Small portable radio', 25.00, 'Small electronics', 5)");
+    conn.execute ("INSERT INTO Inventory (Name, Description, Price, Category, Quantity)\
+        VALUES ('Radio', 'Small portable radio', 25.00, 'Small electronics', 5)");
 
-conn.execute ("INSERT INTO Inventory (Name, Description, Price, Category, Quantity)\
-    VALUES ('Walkie-Talkie', 'Pair of portable communication devices', 40.00, 'Small electronics', 10)");
+    conn.execute ("INSERT INTO Inventory (Name, Description, Price, Category, Quantity)\
+        VALUES ('Walkie-Talkie', 'Pair of portable communication devices', 40.00, 'Small electronics', 10)");
 
     conn.commit()
 
