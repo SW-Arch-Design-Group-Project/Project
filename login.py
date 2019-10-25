@@ -25,6 +25,7 @@ def ValidateUser():
                     rest of the program).
                     """
                     validate = True
+                    return userLogin
 
                 # Throw exceptions and prompt user to re-enter credentials
                 else:
