@@ -8,8 +8,6 @@ def main():
     #Builds initial Database.
     createdatabase.buildDatabase()
 
-
-
     print("\n***************************")
     print("*  Welcome to the Store!  *")
     print("***************************\n")
@@ -23,7 +21,6 @@ def main():
     #      function
     addToCart()
 
-    
 
 
 def homeScreen(userID):
@@ -51,6 +48,7 @@ def homeScreen(userID):
             print("Please enter a store option.\n")
 
     return conn
+
 
 def displayOrderHistory(conn, currentUser):
     userID = conn.execute('SELECT UserID FROM Users WHERE Username = currentUser')
