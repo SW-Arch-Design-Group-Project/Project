@@ -82,10 +82,14 @@ def displayTable(conn):
 
 
 
-def addToCart():
+def addToCart(itemID, itemQuantity):
 
     # TODO This function will be responsible for adding an item to a shopping cart.
-
+    cart = [[]]
+    for each in cart:
+        itemID.append(cart)
+        for object in cart:
+            itemQuantity.append(cart)
     return
 
 
