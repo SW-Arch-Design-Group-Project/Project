@@ -11,6 +11,7 @@ def main():
     print("\n***************************")
     print("*  Welcome to the Store!  *")
     print("***************************\n")
+    print("All items have been Restocked!\n\n")
 
     # login and validation (if it doesn't return a boolean, change this to accept a username.)
     userID = login.ValidateUser()
@@ -66,12 +67,8 @@ def displayTable(conn):
     # TODO Add this function that will display the items from the Database that will be available
     #      add to cart.
 
-<<<<<<< HEAD
     # conn = sqlite3.connect('store.db')
     cursor = conn.execute('SELECT * FROM Inventory')
-=======
-    cursor = conn.execute('SELECT * FROM Inventory GROUP BY Category')
->>>>>>> 54c2f9db4ceb3696a74d0eaf2ba97fa0988704af
 
     print('{:<10s}{:<25s}{:<30s}{:<35s}{:<45s}{:<50s}'.format("\nItem ID", "Name", "Quantity",
                                                               "Price","Category", "Desc"))
@@ -119,6 +116,8 @@ def confirmPurchase(UserID, cart):
     #Insert PurchaseHistory table info with calculated total
     conn.execute ("INSERT INTO PurchaseHistory (OrderID, UserID, Total)\
             VALUES (?, ?, ?)", (OrderID, UserID, total));
+
+
 
 
 # MAIN FUNCTION CALL
