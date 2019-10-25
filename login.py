@@ -18,7 +18,7 @@ def ValidateUser():
 
                 # Check if user input matches credentials in file
                 if ((userLogin) == (line[1])) and ((userPasswd) == (line[2])):
-                    print("match\n")
+                    print("\nMatch!\n")
                     """
                     Assign validate to true and break from loop. This section can be changed later
                     to return if valid or call other functions. (Depending on how we structure the
@@ -29,7 +29,7 @@ def ValidateUser():
 
                 # Throw exceptions and prompt user to re-enter credentials
                 else:
-                    raise Exception("InvalidCredentials")
+                    raise Exception("\nInvalid Credentials! Please Try again.\n")
 
         except Exception as ex:
             print(ex)

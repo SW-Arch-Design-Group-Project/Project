@@ -1,6 +1,7 @@
 import login
 import createdatabase
 import sqlite3
+import time
 
 def main():
 
@@ -22,10 +23,7 @@ def main():
     #      function
     addToCart()
 
-    print("\n**********************************")
-    print("*  Thanks for Shopping with us!  *")
-    print("**********************************\n")
-    return
+    
 
 
 def homeScreen(userID):
@@ -35,7 +33,7 @@ def homeScreen(userID):
 
     while (exitStore != 1):
         try:
-            print("\nStore Options:\n1. View Inventory\n2. View Past Orders\n0. Exit Store")
+            print("\nStore Options:\n1. View Inventory\n2. View Past Orders\n0. Exit Store\n")
             userSelection = int(input("Select an option: "))
 
             if (userSelection) == (1):
@@ -44,7 +42,9 @@ def homeScreen(userID):
                 print("past orders\n")
                 displayOrderHistory(conn, currentUser)
             elif (userSelection) == (0):
-                print("Goodbye\n")
+                print("\n**********************************")
+                print("*  Thanks for Shopping with us!  *")
+                print("**********************************\n")
                 exit()
 
         except Exception as ex:
