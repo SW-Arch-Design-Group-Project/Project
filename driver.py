@@ -62,13 +62,8 @@ def displayOrderHistory(conn, currentUser):
 
 def displayTable(conn):
 
-<<<<<<< HEAD
-    # conn = sqlite3.connect('store.db')
-=======
     # TODO Add this function that will display the items from the Database that will be available
     #      add to cart.
-
->>>>>>> dd7d59c4880d5c86d57b9b1bb5fdaaaefcebdd14
     cursor = conn.execute('SELECT * FROM Inventory')
 
     print('{:<10s}{:<25s}{:<30s}{:<35s}{:<45s}{:<50s}'.format("\nItem ID", "Name", "Quantity",
@@ -111,25 +106,28 @@ def confirmPurchase(UserID, cart):
 
     #First insert into the orders table to create the orderID
     conn.execute ("INSERT INTO Orders (UserID)\
-        VALUES (?)", (UserID));
+        VALUES (?)", (UserID,));
 
     #Select the most recent orderID for the user
-    OrderID = conn.execute("SELECT MAX(OrderID) FROM Orders WHERE UserID = ?", (UserID))
+    OrderID = conn.execute("SELECT MAX(OrderID) FROM Orders WHERE UserID = ?", (UserID,))
 
-    #Insert the itemID's and their quantities into the OrderItems Table
+    #Insert the itemID's and their quantities into the OrderItems Table and update the Inventory table
     total = 0
     for item in cart:
         price = 0
         ItemID = [item][0]
         Quantity = [item][1]
-        price = conn.execute ("SELECT Price FROM Inventory WHERE ItemID = ItemID")
+        price = conn.execute("SELECT Price FROM Inventory WHERE ItemID = ?", (ItemID,))
         total += price * Quantity
-        conn.execute ("INSERT INTO OrderItems (OrderID, ItemID, Quantity)\
-            VALUES (?, ?, ?)", (OrderID, ItemID, Quantity));
+        conn.execute("INSERT INTO OrderItems (OrderID, ItemID, Quantity)\
+            VALUES (?, ?, ?)", (OrderID, ItemID, Quantity,));
+        current_quantity = conn.execute("SELECT Quantity FROM Inventory WHERE ItemID = ?", (ItemID,))
+        new_quantity = current_quantity - Quantity
+        conn.execute("UPDATE Inventory SET Quantity = ? WHERE ItemID = ?", (new_quantity,ItemID,))
 
     #Insert PurchaseHistory table info with calculated total
-    conn.execute ("INSERT INTO PurchaseHistory (OrderID, UserID, Total)\
-            VALUES (?, ?, ?)", (OrderID, UserID, total));
+    conn.execute("INSERT INTO PurchaseHistory (OrderID, UserID, Total)\
+            VALUES (?, ?, ?)", (OrderID, UserID, total,));
 
 
 
