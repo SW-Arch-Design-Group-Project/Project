@@ -57,12 +57,12 @@ def displayTable(conn):
     #      add to cart.
 
     # conn = sqlite3.connect('store.db')
-    cursor = conn.execute('SELECT * FROM Inventory GROUP BY Category')
+    cursor = conn.execute('SELECT * FROM Inventory')
 
     print('{:<10s}{:<25s}{:<30s}{:<35s}{:<45s}{:<50s}'.format("\nItem ID", "Name", "Quantity", "Price", "Category", "Desc"))
     for row in cursor:
         print('{:<10d}{:<25s}{:<30d}{:<35.2f}{:<45s}{:<50s}'.format(row[0], row[1], row[5],
-              row[3], row[4], row[2]))
+            row[3], row[4], row[2]))
     print("\n")
 
     return
