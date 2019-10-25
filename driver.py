@@ -71,10 +71,6 @@ def displayTable(conn):
     # TODO Add this function that will display the items from the Database that will be available
     #      add to cart.
 
-<<<<<<< HEAD
-=======
-    # conn = sqlite3.connect('store.db')
->>>>>>> c7ba6013f886b5b6eb0971be02903ca136177f29
     cursor = conn.execute('SELECT * FROM Inventory')
 
     print('{:<10s}{:<25s}{:<30s}{:<35s}{:<45s}{:<50s}'.format("\nItem ID", "Name", "Quantity",
