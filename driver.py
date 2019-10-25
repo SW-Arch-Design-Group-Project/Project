@@ -1,10 +1,21 @@
 import login
+import createdatabase
 import sqlite3
 
 def main():
+
+    #Builds initial Database.
+    try:
+        createdatabase.buildDatabase()
+    except:
+        print("Database already created.")
+
+
     print("\n***************************")
     print("*  Welcome to the Store!  *")
     print("***************************\n")
+
+    
 
 
     #login and validation (if it doesn't return a boolean, change this to accept a username.)
