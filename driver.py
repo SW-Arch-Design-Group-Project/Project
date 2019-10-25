@@ -80,6 +80,30 @@ def addToCart(itemID, itemQuantity):
     return
 
 
+def confirmPurchase(UserID, cart):
+
+    #First insert into the orders table to create the orderID
+    conn.execute ("INSERT INTO Orders (UserID)\
+        VALUES (?)", (UserID));
+
+    #Select the most recent orderID for the user
+    OrderID = conn.execute("SELECT MAX(OrderID) FROM Orders WHERE UserID = ?", (UserID))
+
+    #Insert the itemID's and their quantities into the OrderItems Table
+    total = 0
+    for item in cart:
+        price = 0
+        ItemID = [item][0]
+        Quantity = [item][1]
+        price = conn.execute ("SELECT Price FROM Inventory WHERE ItemID = ItemID")
+        total += price * Quantity
+        conn.execute ("INSERT INTO OrderItems (OrderID, ItemID, Quantity)\
+            VALUES (?, ?, ?)", (OrderID, ItemID, Quantity));
+
+    #Insert PurchaseHistory table info with calculated total
+    conn.execute ("INSERT INTO PurchaseHistory (OrderID, UserID, Total)\
+            VALUES (?, ?, ?)", (OrderID, UserID, total));
+
 
 # MAIN FUNCTION CALL
 if __name__ == "__main__":
