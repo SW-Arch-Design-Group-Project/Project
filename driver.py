@@ -5,11 +5,9 @@ import sqlite3
 def main():
 
     #Builds initial Database.
-    try:
-        createdatabase.buildDatabase()
-    except:
-        print("Database already created.")
-
+    createdatabase.buildDatabase()
+    
+    
 
     print("\n***************************")
     print("*  Welcome to the Store!  *")
