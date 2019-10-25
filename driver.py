@@ -17,12 +17,6 @@ def main():
     userID = login.ValidateUser()
     session = homeScreen(userID)
 
-    # TODO This function may can be called within the displayTable() Function
-    #      to allow the display table to update itself and take load off the main
-    #      function
-    addToCart()
-
-
 
 def homeScreen(userID):
     currentUser = userID
@@ -64,9 +58,6 @@ def displayOrderHistory(conn, currentUser):
 
 def displayTable(conn):
 
-    # TODO Add this function that will display the items from the Database that will be available
-    #      add to cart.
-
     # conn = sqlite3.connect('store.db')
     cursor = conn.execute('SELECT * FROM Inventory')
 
@@ -78,6 +69,8 @@ def displayTable(conn):
             row[3], row[4], row[2]))
     print("\n")
 
+    addToCart()
+
     return
 
 
@@ -85,12 +78,23 @@ def displayTable(conn):
 def addToCart(itemID, itemQuantity):
 
     # TODO This function will be responsible for adding an item to a shopping cart.
-    cart = [[]]
-    for each in cart:
-        itemID.append(cart)
-        for object in cart:
-            itemQuantity.append(cart)
-    return
+        
+    still_shopping = True
+    while still_shopping = True:
+
+        itemID = int(input("Enter an Item ID to add it to your cart: "))
+        quantity = int(input("Enter a quantity: "))
+        
+
+
+            
+
+        cart = [[]]
+        for each in cart:
+            itemID.append(cart)
+            for object in cart:
+                itemQuantity.append(cart)
+        return
 
 
 def confirmPurchase(UserID, cart):
