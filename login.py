@@ -1,5 +1,6 @@
 
 def ValidateUser():
+    print("\n---------------- User Login ----------------\n")
     userLogin = str()       # User input for username credential
     userPasswd = str()      # User input for password credential
     validate = False
@@ -18,12 +19,12 @@ def ValidateUser():
 
                 # Check if user input matches credentials in file
                 if ((userLogin) == (line[1])) and ((userPasswd) == (line[2])):
-                    print("\nMatch!\n")
                     """
                     Assign validate to true and break from loop. This section can be changed later
                     to return if valid or call other functions. (Depending on how we structure the
                     rest of the program).
                     """
+                    print("\n")
                     validate = True
                     return userLogin
 
