@@ -37,12 +37,11 @@ def ValidateUser():
                         validate = True
                         return userLogin
 
-                    # Throw exceptions and prompt user to re-enter credentials
-                    # else:
-                    #     raise Exception("\nInvalid Credentials! Please Try again.\n")
+                    elif (line[0] == ''):
+                        raise Exception("\nInvalid Credentials! Please Try again.\n")
 
         except Exception as ex:
-            print(ex)
+            print("\nInvalid Credentials! Please Try again.\n")
 
 if __name__ == '__main__':
     ValidateUser()

@@ -9,6 +9,7 @@ def buildDatabase():
     
     conn.execute('''DROP TABLE IF EXISTS Inventory''')
     conn.execute('''DROP TABLE IF EXISTS OrderItems''')
+    conn.execute('''DROP TABLE IF EXISTS User''')
 
     conn.execute('''CREATE TABLE IF NOT EXISTS User
             (UserID INTEGER PRIMARY KEY	 AUTOINCREMENT,

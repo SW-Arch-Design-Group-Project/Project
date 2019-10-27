@@ -206,7 +206,7 @@ def confirmPurchase(currentUser, cart, conn):
     #Search database for user address, then prompt if not there
     cursor = conn.execute("SELECT Address FROM User WHERE UserID = ?", (UserID,))
     data = cursor.fetchone()
-    if (data is None):
+    if (data[0] is None):
         address = input("\nPlease enter your address for shipment: ")
         conn.execute("UPDATE User SET Address = ? WHERE UserID = ?", (address, UserID,));
         print("\nAddress information stored in database.\n")
@@ -215,7 +215,14 @@ def confirmPurchase(currentUser, cart, conn):
         address = data[0]
 
     #Get credit card info from user
-    creditcard = int(input("\nPlease enter your credit card information for the purchase: "))
+    creditcard = input("\nPlease enter your credit card information for the purchase: ")
+    cardNotValid = False
+    while (cardNotValid == False):
+        if (creditcard.isdigit()) and (len(str(creditcard)) == 10):
+            cardNotValid = True
+            creditcard = int(creditcard)
+        else:
+            creditcard = input("\nPlease enter a 10 digit credit card for the purchase: ")
 
     #First insert into the orders table to create the orderID
     conn.execute ("INSERT INTO Orders (UserID)\
