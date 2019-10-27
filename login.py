@@ -20,22 +20,26 @@ def ValidateUser():
             # Open credentials file and parse entries
             with open(userDatabase, 'r') as credentialsFile:
                 next(credentialsFile)
-                line = credentialsFile.readline().split(",")        # Read-in one, split by commas, and append to list
+                eof = False
 
-                # Check if user input matches credentials in file
-                if ((userLogin) == (line[1])) and ((userPasswd) == (line[2])):
-                    """
-                    Assign validate to true and break from loop. This section can be changed later
-                    to return if valid or call other functions. (Depending on how we structure the
-                    rest of the program).
-                    """
-                    print("\n")
-                    validate = True
-                    return userLogin
+                while (eof == False):
+                    line = credentialsFile.readline().strip("\n").split(",")        # Read-in one, split by commas, and append to list
 
-                # Throw exceptions and prompt user to re-enter credentials
-                else:
-                    raise Exception("\nInvalid Credentials! Please Try again.\n")
+                    # Check if user input matches credentials in file
+                    if ((userLogin) == (line[1])) and ((userPasswd) == (line[2])):
+                        """
+                        Assign validate to true and break from loop. This section can be changed later
+                        to return if valid or call other functions. (Depending on how we structure the
+                        rest of the program).
+                        """
+                        print("\n")
+                        eof = True
+                        validate = True
+                        return userLogin
+
+                    # Throw exceptions and prompt user to re-enter credentials
+                    # else:
+                    #     raise Exception("\nInvalid Credentials! Please Try again.\n")
 
         except Exception as ex:
             print(ex)

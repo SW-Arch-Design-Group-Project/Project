@@ -58,7 +58,7 @@ def homeScreen(userID):
 
 
 def displayOrderHistory(conn, currentUser):
-    print("\n---------------- Order History ----------------\n")
+    print("\n---------------- Order History ----------------")
 
     cursor = conn.execute("SELECT UserID FROM User WHERE Username = ?", (currentUser,))
     data = cursor.fetchone()
@@ -91,7 +91,7 @@ def displayOrderHistory(conn, currentUser):
 
 
 def displayTable(conn):
-    print("\n---------------- Store Inventory ----------------\n")
+    print("\n---------------- Store Inventory ----------------")
 
 
     # TODO Add this function that will display the items from the Database that will be available
@@ -113,7 +113,7 @@ def displayTable(conn):
 def addToCart(conn, currentUser):
 
     # TODO This function will be responsible for adding an item to a shopping cart.
-    print("\n---------------- Cart Builder ----------------\n")
+    print("\n---------------- Cart Builder ----------------")
     cart = []
     still_shopping = True
     while still_shopping == True:
@@ -144,7 +144,7 @@ def addToCart(conn, currentUser):
     reviewCart(currentUser, conn, cart)
 
 def reviewCart(currentUser, conn, cart):
-    print("\n---------------- Review Cart ----------------\n")
+    print("\n---------------- Review Cart ----------------")
 
     runningTotal = 0;
     print('{:<10s}{:<15s}{:<20s}{:<25s}{:<30s}'.format("\nItem ID", "Name", "Price", "Quantity", "Total"))
@@ -196,6 +196,7 @@ def reviewCart(currentUser, conn, cart):
 
 # allow user to confirm his/her purchase
 def confirmPurchase(currentUser, cart, conn):
+    print("\n---------------- Confirm Purchase ----------------")
 
     #Get UserID from currentUser
     cursor = conn.execute("SELECT UserID FROM User WHERE Username = ?", (currentUser,))
@@ -252,6 +253,11 @@ def confirmPurchase(currentUser, cart, conn):
             VALUES (?, ?, ?, ?)", (OrderID, UserID, total, creditcard,));
 
     conn.commit()
+
+    print("\n---------------- Order Confirmed ----------------")
+    print('{:<10s}{:<15s}{:<25s}{:<45s}'.format("Order ID", "Total", "Payment Method", "Sipping Address"))
+    print('{:<10d}{:<15.2f}{:<25d}{:<45s}'.format(OrderID, total, creditcard, address))
+
 
 # MAIN FUNCTION CALL
 if __name__ == "__main__":
