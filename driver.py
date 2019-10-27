@@ -77,7 +77,7 @@ def displayTable(conn):
             row[3], row[4], row[2]))
     print("\n")
 
-    addToCart()
+    # addToCart()
 
     return
 
@@ -99,19 +99,54 @@ def addToCart(conn, currentUser):
 
         # Check if item and quantity is in stock
         if (data is None):
-            print("That Item is out of stock or in reduced quantity.")
+            print("\nThat Item is out of stock or in reduced quantity.\n")
         else:
             print('{:<10s}{:<15s}{:<25s}'.format("\nItem ID", "Name", "Price"))
             print('{:<10d}{:<15s}{:<25.2f}'.format(data[0], data[1], data[3]))
             print("Successfully Added to Cart.\n")
 
+            # Add        itemID,  name,    quantity
             cart.append([data[0], data[1], quantity])
 
-        # for each in cart:
-        #     itemID.append(cart)
-        #     for object in cart:
-        #         itemQuantity.append(cart)
-        # return
+        # Prompt user to continue shopping
+        done = str(input("Are you finished adding items? (y/n): "))
+        if (done == 'y'):
+            still_shopping = False
+            break
+
+    reviewCart(conn, cart)
+
+def reviewCart(conn, cart):
+    print("\n---------------- Review Cart ----------------\n")
+
+    runningTotal = 0;
+    print('{:<10s}{:<15s}{:<20s}{:<25s}{:<30s}'.format("\nItem ID", "Name", "Price", "Quantity", "Total"))
+
+    for element in range(len(cart)):
+        currentIndex = cart[element][0]
+        cursor = conn.execute("SELECT * FROM Inventory WHERE ItemID = ?", (currentIndex,))
+        data = cursor.fetchone()
+        runningTotal = (runningTotal + (data[3] * cart[element][2]))
+        print('{:<10d}{:<15s}{:<20.2f}{:<25d}{:<30.2f}'.format(data[0], data[1], data[3],
+                                                               cart[element][2], (data[3] * cart[element][2])))
+    # Print running total to screen
+
+    print("---------------------------------------------------------------------------")
+    print('{:>75.2f}'.format(runningTotal))
+
+    # procedeToCheckout = False
+    # while not procedeToCheckout:
+    #     print("\nCart Options:\n1. Remove Item\n2. Procede To Checkout\n3. Delete Cart")
+    #     cartSelection = int(input("\nSelect and option: "))
+    #
+    #     if (cartSelection == 1):
+    #
+    #     if (cartSelection == 2):
+    #
+    #     if (cartSelection == 3):
+    #
+    #     else:
+    #         continue
 
 
 # allow user to view what's in his/her cart
@@ -126,26 +161,24 @@ def view(cart):
     switch(whatNext)
     {
 
-        # continue shopping
-        case
-    1:
-    still_shopping = True
-    break
+    # continue shopping
+    case 1:
+        still_shopping = True
+        break
 
     # remove the item from the cart
-    case
-    2:
-    print("Removing the item")
-    removeItem(cart)
-    break
+    case 2:
+        print("Removing the item")
+        removeItem(cart)
+        break
 
 
-# confirm the user's purchase
-case
-3:
-print("Gathering your information.....")
-confirmPurchase(UserID, cart)
-break
+    # confirm the user's purchase
+    case 3:
+        print("Gathering your information.....")
+        confirmPurchase(UserID, cart)
+        break
+}
 
 
 # allow user to remove from cart
