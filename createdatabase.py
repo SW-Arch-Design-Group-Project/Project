@@ -12,9 +12,9 @@ def buildDatabase():
 
     conn.execute('''CREATE TABLE IF NOT EXISTS User
             (UserID INTEGER PRIMARY KEY	 AUTOINCREMENT,
-            Address         CHAR(100)   NOT NULL,
+            Address         CHAR(100),
             Password        CHAR(50)    NOT NULL,
-            Username        CHAR(50));''')
+            Username        CHAR(50)    NOT NULL);''')
 
     conn.execute('''CREATE TABLE IF NOT EXISTS Inventory
             (ItemID INTEGER PRIMARY KEY	UNIQUE,
