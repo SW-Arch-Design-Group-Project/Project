@@ -114,6 +114,57 @@ def addToCart(conn, currentUser):
         # return
 
 
+# allow user to view what's in his/her cart
+def view(cart):
+    # traverse the cart, printing everything
+    for count in range(len(cart)):
+        print(cart[count])
+
+    # see what user wants to do next
+    print("What would you like to do next? ")
+    whatNext = input(int("1. Continue Shopping\n2. Remove Item\n3. Confirm Purchase"))
+    switch(whatNext)
+    {
+
+        # continue shopping
+        case
+    1:
+    still_shopping = True
+    break
+
+    # remove the item from the cart
+    case
+    2:
+    print("Removing the item")
+    removeItem(cart)
+    break
+
+
+# confirm the user's purchase
+case
+3:
+print("Gathering your information.....")
+confirmPurchase(UserID, cart)
+break
+
+
+# allow user to remove from cart
+def removeItem(cart):
+    removeWhat = input("Which item would you like to delete? ")
+    for each in cart:
+        if each == removeWhat:
+            cart.remove(removeWhat)
+    print("The item has been removed from your cart.")
+
+
+## Just in case removeItem(cart) does not run the first way
+## def removeItem(cart):
+##    removeWhat = input("Which item would you like to delete? ")
+##    if removeWhat in cart:
+##          cart.pop(cart.index(removeWhat))
+
+
+# allow user to confirm his/her purchase
 def confirmPurchase(UserID, cart):
 
     #First insert into the orders table to create the orderID
