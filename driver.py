@@ -116,7 +116,7 @@ def addToCart(conn, currentUser):
 
     reviewCart(currentUser, conn, cart)
 
-def reviewCart(UserID, conn, cart):
+def reviewCart(currentUser, conn, cart):
     print("\n---------------- Review Cart ----------------\n")
 
     runningTotal = 0;
@@ -164,11 +164,11 @@ def reviewCart(UserID, conn, cart):
         else:
             continue
 
-    confirmPurchase(UserID, cart, conn)
+    confirmPurchase(currentUser, cart, conn)
 
 
 # allow user to confirm his/her purchase
-def confirmPurchase(UserID, cart, conn):
+def confirmPurchase(currentUser, cart, conn):
 
     #First insert into the orders table to create the orderID
     conn.execute ("INSERT INTO Orders (UserID)\
