@@ -52,7 +52,7 @@ def homeScreen(userID):
                 exit()
 
         except Exception as ex:
-            print("Please enter a store option.\n")
+            print("Please enter a store option.\n", ex)
 
     return conn
 
@@ -261,6 +261,8 @@ def confirmPurchase(currentUser, cart, conn):
     print("\n---------------- Order Confirmed ----------------")
     print('{:<10s}{:<15s}{:<25s}{:<45s}'.format("Order ID", "Total", "Payment Method", "Sipping Address"))
     print('{:<10d}{:<15.2f}{:<25d}{:<45s}'.format(OrderID, total, creditcard, address))
+
+    homeScreen(currentUser)
 
 
 # MAIN FUNCTION CALL
