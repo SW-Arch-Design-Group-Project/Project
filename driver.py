@@ -179,10 +179,8 @@ def reviewCart(currentUser, conn, cart):
                     cart[element][2] = (cart[element][2] - rmQuantity)
                     print(rmQuantity, "removed from item", rmItem)
                     break
-                # else:
-                #     print("Item was not found in your cart")
 
-            reviewCart(conn, cart)
+            reviewCart(currentUser, conn, cart)
 
         if (cartSelection == 2):
             proceedToCheckout = True
