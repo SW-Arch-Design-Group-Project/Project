@@ -207,8 +207,8 @@ def confirmPurchase(currentUser, cart, conn):
     data = cursor.fetchone()
     if (data is None):
         address = input("\nPlease enter your address for shipment: ")
-        conn.execute("INSERT INTO Orders (UserID)\
-            VALUES (?)", (UserID,));
+        conn.execute("INSERT INTO User WHERE UserID = ? (Address)\
+            VALUES (?)", (UserID, address,));
         print("\nAddress information stored in database.\n")
     else:
         print("\nAddress information found in database.\n")
