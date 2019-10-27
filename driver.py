@@ -114,87 +114,104 @@ def addToCart(conn, currentUser):
             still_shopping = False
             break
 
-    reviewCart(conn, cart)
-
-def reviewCart(conn, cart):
-    print("\n---------------- Review Cart ----------------\n")
-
-    runningTotal = 0;
-    print('{:<10s}{:<15s}{:<20s}{:<25s}{:<30s}'.format("\nItem ID", "Name", "Price", "Quantity", "Total"))
-
-    for element in range(len(cart)):
-        currentIndex = cart[element][0]
-        cursor = conn.execute("SELECT * FROM Inventory WHERE ItemID = ?", (currentIndex,))
-        data = cursor.fetchone()
-        runningTotal = (runningTotal + (data[3] * cart[element][2]))
-        print('{:<10d}{:<15s}{:<20.2f}{:<25d}{:<30.2f}'.format(data[0], data[1], data[3],
-                                                               cart[element][2], (data[3] * cart[element][2])))
-    # Print running total to screen
-
-    print("---------------------------------------------------------------------------")
-    print('{:>75.2f}'.format(runningTotal))
-
-    # procedeToCheckout = False
-    # while not procedeToCheckout:
-    #     print("\nCart Options:\n1. Remove Item\n2. Procede To Checkout\n3. Delete Cart")
-    #     cartSelection = int(input("\nSelect and option: "))
-    #
-    #     if (cartSelection == 1):
-    #
-    #     if (cartSelection == 2):
-    #
-    #     if (cartSelection == 3):
-    #
-    #     else:
-    #         continue
-
-
-# allow user to view what's in his/her cart
-def view(cart):
-    # traverse the cart, printing everything
-    for count in range(len(cart)):
-        print(cart[count])
-
-    # see what user wants to do next
-    print("What would you like to do next? ")
-    whatNext = input(int("1. Continue Shopping\n2. Remove Item\n3. Confirm Purchase"))
-    switch(whatNext)
-    {
-
-    # continue shopping
-    case 1:
-        still_shopping = True
-        break
-
-    # remove the item from the cart
-    case 2:
-        print("Removing the item")
-        removeItem(cart)
-        break
+#     reviewCart(conn, cart)
+#
+# def reviewCart(conn, cart):
+#     print("\n---------------- Review Cart ----------------\n")
+#
+#     runningTotal = 0;
+#     print('{:<10s}{:<15s}{:<20s}{:<25s}{:<30s}'.format("\nItem ID", "Name", "Price", "Quantity", "Total"))
+#
+#     for element in range(len(cart)):
+#         currentIndex = cart[element][0]
+#         cursor = conn.execute("SELECT * FROM Inventory WHERE ItemID = ?", (currentIndex,))
+#         data = cursor.fetchone()
+#         runningTotal = (runningTotal + (data[3] * cart[element][2]))
+#         print('{:<10d}{:<15s}{:<20.2f}{:<25d}{:<30.2f}'.format(data[0], data[1], data[3],
+#                                                                cart[element][2], (data[3] * cart[element][2])))
+#     # Print running total to screen
+#
+#     print("---------------------------------------------------------------------------")
+#     print('{:>75.2f}'.format(runningTotal))
+#
+#     procedeToCheckout = False
+#     while not procedeToCheckout:
+#         print("\nCart Options:\n1. Remove Item\n2. Procede To Checkout\n3. Delete Cart")
+#         cartSelection = int(input("\nSelect an option: "))
+#
+#         if (cartSelection == 1):
+#             rmItem = int(input("Enter ItemID you wish to remove: "))
+#             rmQuantity = int(input("Enter quantity you wish to remove: "))
+#
+#             for element in range(len(cart)):
+#                 if (cart[element][0] == rmItem) and (cart[element][2] <= rmQuantity):
+#                     cart.pop(element)
+#                     print("Item removed from your cart")
+#                     break
+#                 if (cart[element][0] == rmItem) and (cart[element][2] > rmQuantity):
+#                     cart[element][2] = (cart[element][2] - rmQuantity)
+#                     print(rmQuantity, "removed from item", rmItem)
+#                     break
+#                 # else:
+#                 #     print("Item was not found in your cart")
+#
+#             reviewCart(conn, cart)
+#
+#         if (cartSelection == 2):
+#             print("IMPLEMENT LATER")
+#             procedeToCheckout = True
+#         if (cartSelection == 3):
+#             homeScreen()
+#         else:
+#             continue
 
 
-    # confirm the user's purchase
-    case 3:
-        print("Gathering your information.....")
-        confirmPurchase(UserID, cart)
-        break
-}
-
-
-# allow user to remove from cart
-def removeItem(cart):
-    removeWhat = input("Which item would you like to delete? ")
-    for each in cart:
-        if each == removeWhat:
-            cart.remove(removeWhat)
-    print("The item has been removed from your cart.")
-
-
-## Just in case removeItem(cart) does not run the first way
-## def removeItem(cart):
-##    removeWhat = input("Which item would you like to delete? ")
-##    if removeWhat in cart:
-##          cart.pop(cart.index(removeWhat))
+# # allow user to view what's in his/her cart
+# def view(cart):
+#     # traverse the cart, printing everything
+#     for count in range(len(cart)):
+#         print(cart[count])
+#
+#     # see what user wants to do next
+#     print("What would you like to do next? ")
+#     whatNext = input(int("1. Continue Shopping\n2. Remove Item\n3. Confirm Purchase"))
+#     switch(whatNext)
+#     {
+#
+#     # continue shopping
+#     case 1:
+#         still_shopping = True
+#         break
+#
+#     # remove the item from the cart
+#     case 2:
+#         print("Removing the item")
+#         removeItem(cart)
+#         break
+#
+#
+#     # confirm the user's purchase
+#     case 3:
+#         print("Gathering your information.....")
+#         confirmPurchase(UserID, cart)
+#         break
+# }
+#
+#
+# # allow user to remove from cart
+# def removeItem(cart):
+#     removeWhat = input("Which item would you like to delete? ")
+#     for each in cart:
+#         if each == removeWhat:
+#             cart.remove(removeWhat)
+#     print("The item has been removed from your cart.")
+#
+#
+# ## Just in case removeItem(cart) does not run the first way
+# ## def removeItem(cart):
+# ##    removeWhat = input("Which item would you like to delete? ")
+# ##    if removeWhat in cart:
+# ##          cart.pop(cart.index(removeWhat))
 
 
 # allow user to confirm his/her purchase
