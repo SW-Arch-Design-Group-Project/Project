@@ -50,6 +50,9 @@ def buildDatabase():
     conn.execute ("INSERT INTO User (Address, Password, Username)\
         VALUES ('75 B. S. Hood Road, Mississippi State, MS 39762', 'SWARCH2019', 'User')");
 
+    conn.execute ("INSERT INTO User (Password, Username)\
+        VALUES ('noaddress', 'User2')");
+
     conn.execute ("INSERT INTO Inventory (Name, Description, Price, Category, Quantity)\
         VALUES ('Pledge', 'Lemon scented Pledge', 8.00, 'Household items', 20)");
 
