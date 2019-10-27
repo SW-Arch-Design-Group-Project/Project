@@ -180,6 +180,19 @@ def reviewCart(currentUser, conn, cart):
 # allow user to confirm his/her purchase
 def confirmPurchase(currentUser, cart, conn):
 
+    # Search database for user address, then prompt if not there
+    cursor = conn.execute("SELECT Address FROM User")
+    data = cursor.fetchone()
+
+    # Check if item and quantity is in stock
+    if (data is None):
+        address = input("\nPlease enter your address for shipment: ")
+        conn.execute("INSERT INTO Orders (UserID)\
+            VALUES (?)", (UserID,));
+    else:
+        print("\nAddress information found in database.\n")
+        address = data[0]
+
     #First insert into the orders table to create the orderID
     conn.execute ("INSERT INTO Orders (UserID)\
         VALUES (?)", (UserID,));
@@ -192,7 +205,7 @@ def confirmPurchase(currentUser, cart, conn):
     for item in cart:
         price = 0
         ItemID = [item][0]
-        Quantity = [item][1]
+        Quantity = [item][2]
         price = conn.execute("SELECT Price FROM Inventory WHERE ItemID = ?", (ItemID,))
         total += price * Quantity
         conn.execute("INSERT INTO OrderItems (OrderID, ItemID, Quantity)\
