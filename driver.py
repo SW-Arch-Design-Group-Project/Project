@@ -19,20 +19,23 @@ def main():
 
 
 def homeScreen(userID):
+    print("\n---------------- Store Home ----------------\n")
     currentUser = userID
     conn = sqlite3.connect('store.db')
     exitStore = 0
 
     while (exitStore != 1):
         try:
-            print("\nStore Options:\n1. View Inventory\n2. View Past Orders\n0. Exit Store\n")
+            print("Store Options:\n1. View Inventory\n2. View Past Orders\n3. Build Cart\n0. Exit Store\n")
             userSelection = int(input("Select an option: "))
 
             if (userSelection) == (1):
                 displayTable(conn)
-            elif (userSelection) == (2):
+            if (userSelection) == (2):
                 displayOrderHistory(conn, currentUser)
-            elif (userSelection) == (0):
+            if (userSelection) == (3):
+                addToCart(conn, currentUser)
+            if (userSelection) == (0):
                 print("\n**********************************")
                 print("*  Thanks for Shopping with us!  *")
                 print("**********************************\n")
@@ -66,11 +69,11 @@ def displayTable(conn):
     #      add to cart.
     cursor = conn.execute('SELECT * FROM Inventory')
 
-    print('{:<10s}{:<25s}{:<30s}{:<35s}{:<45s}{:<50s}'.format("\nItem ID", "Name", "Quantity",
+    print('{:<10s}{:<15s}{:<20s}{:<25s}{:<30s}{:<35s}'.format("\nItem ID", "Name", "Quantity",
                                                               "Price","Category", "Desc"))
 
     for row in cursor:
-        print('{:<10d}{:<25s}{:<30d}{:<35.2f}{:<45s}{:<50s}'.format(row[0], row[1], row[5],
+        print('{:<10d}{:<15s}{:<20d}{:<25.2f}{:<30s}{:<35s}'.format(row[0], row[1], row[5],
             row[3], row[4], row[2]))
     print("\n")
 
@@ -80,26 +83,35 @@ def displayTable(conn):
 
 
 
-def addToCart(itemID, itemQuantity):
+def addToCart(conn, currentUser):
 
     # TODO This function will be responsible for adding an item to a shopping cart.
-        
+    print("\n---------------- Cart Builder ----------------\n")
+    cart = []
     still_shopping = True
-    while still_shopping = True:
+    while still_shopping == True:
 
         itemID = int(input("Enter an Item ID to add it to your cart: "))
         quantity = int(input("Enter a quantity: "))
-        
 
+        cursor = conn.execute("SELECT * FROM Inventory WHERE ItemID = ? AND Quantity >= ?", (itemID, quantity,))
+        data = cursor.fetchone()
 
-            
+        # Check if item and quantity is in stock
+        if (data is None):
+            print("That Item is out of stock or in reduced quantity.")
+        else:
+            print('{:<10s}{:<15s}{:<25s}'.format("\nItem ID", "Name", "Price"))
+            print('{:<10d}{:<15s}{:<25.2f}'.format(data[0], data[1], data[3]))
+            print("Successfully Added to Cart.\n")
 
-        cart = [[]]
-        for each in cart:
-            itemID.append(cart)
-            for object in cart:
-                itemQuantity.append(cart)
-        return
+            cart.append([data[0], data[1], quantity])
+
+        # for each in cart:
+        #     itemID.append(cart)
+        #     for object in cart:
+        #         itemQuantity.append(cart)
+        # return
 
 
 def confirmPurchase(UserID, cart):
