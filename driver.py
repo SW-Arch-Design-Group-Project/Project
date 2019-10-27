@@ -14,8 +14,13 @@ def main():
     print("All items have been Restocked!\n\n")
 
     # login and validation (if it doesn't return a boolean, change this to accept a username.)
+    userLogin()
+
+def userLogin():
     userID = login.ValidateUser()
     session = homeScreen(userID)
+    return
+
 
 
 def homeScreen(userID):
@@ -26,7 +31,7 @@ def homeScreen(userID):
 
     while (exitStore != 1):
         try:
-            print("Store Options:\n1. View Inventory\n2. View Past Orders\n3. Build Cart\n0. Exit Store\n")
+            print("Store Options:\n1. View Inventory\n2. View Past Orders\n3. Build Cart\n9. Logout\n0. Exit Store\n")
             userSelection = int(input("Select an option: "))
 
             if (userSelection) == (1):
@@ -35,6 +40,11 @@ def homeScreen(userID):
                 displayOrderHistory(conn, currentUser)
             if (userSelection) == (3):
                 addToCart(conn, currentUser)
+            if (userSelection) == (9):
+                print("\n**********************************")
+                print("*  Thanks for Shopping with us!  *")
+                print("**********************************\n\n\n")
+                userLogin()
             if (userSelection) == (0):
                 print("\n**********************************")
                 print("*  Thanks for Shopping with us!  *")

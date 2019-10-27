@@ -8,7 +8,12 @@ def ValidateUser():
     # Loop until user enters correct credentials
     while (validate == False):
         try:
+            print("Enter 'exit' as a Username to close the store.\n")
             userLogin = str(input("Username: "))        # Get username input
+            
+            if userLogin == "exit":
+                exit()
+            
             userPasswd = str(input("Password: "))       # Get password input
             userDatabase = "user credentials.txt"       # Get user credentials file
 
