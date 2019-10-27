@@ -170,18 +170,23 @@ def reviewCart(currentUser, conn, cart):
 # allow user to confirm his/her purchase
 def confirmPurchase(currentUser, cart, conn):
 
-    # Search database for user address, then prompt if not there
-    cursor = conn.execute("SELECT Address FROM User")
-    data = cursor.fetchone()
+    #Get UserID from currentUser
+    UserID = conn.execute("SELECT UserID FROM User WHERE Username = ?", (currentUser,))
 
-    # Check if item and quantity is in stock
+    #Search database for user address, then prompt if not there
+    cursor = conn.execute("SELECT Address FROM User WHERE UserID = ?", (UserID,))
+    data = cursor.fetchone()
     if (data is None):
         address = input("\nPlease enter your address for shipment: ")
         conn.execute("INSERT INTO Orders (UserID)\
             VALUES (?)", (UserID,));
+        print("\nAddress information stored in database.\n")
     else:
         print("\nAddress information found in database.\n")
         address = data[0]
+
+    #Get credit card info from user
+    creditcard = int(input("\nPlease enter your credit card information for the purchase: "))
 
     #First insert into the orders table to create the orderID
     conn.execute ("INSERT INTO Orders (UserID)\
@@ -205,10 +210,8 @@ def confirmPurchase(currentUser, cart, conn):
         conn.execute("UPDATE Inventory SET Quantity = ? WHERE ItemID = ?", (new_quantity,ItemID,))
 
     #Insert PurchaseHistory table info with calculated total
-    conn.execute("INSERT INTO PurchaseHistory (OrderID, UserID, Total)\
-            VALUES (?, ?, ?)", (OrderID, UserID, total,));
-
-
+    conn.execute("INSERT INTO PurchaseHistory (OrderID, UserID, Total, CreditCard)\
+            VALUES (?, ?, ?, ?)", (OrderID, UserID, total, creditcard,));
 
 
 # MAIN FUNCTION CALL
