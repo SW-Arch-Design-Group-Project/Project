@@ -6,7 +6,7 @@ def buildDatabase():
 
     print("Opened database successfully")
 
-    conn.execute('''DROP TABLE IF EXISTS User''')
+    
     conn.execute('''DROP TABLE IF EXISTS Inventory''')
     conn.execute('''DROP TABLE IF EXISTS OrderItems''')
 
